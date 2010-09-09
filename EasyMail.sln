@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyMail", "EasyMail\EasyMail.csproj", "{862F6501-F509-4768-8D6B-88CE7583E66F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyMail", "EasyMail.csproj", "{862F6501-F509-4768-8D6B-88CE7583E66F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
