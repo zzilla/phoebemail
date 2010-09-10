@@ -228,7 +228,10 @@ namespace PhoebeMail
                     listBoxAddresses.Items.Clear();
                     foreach (Match m in emails)
                     {
-                        listBoxAddresses.Items.Add(m.Value);
+                        if (!listBoxAddresses.Items.Contains(m.Value))
+                        {
+                            listBoxAddresses.Items.Add(m.Value);
+                        }
                     }
                 }
             }
