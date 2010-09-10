@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{95FC5B67-3C6F-472A-A306-D1C89148138D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbService", "DbService\DbService.csproj", "{AD07638F-C0A9-44A1-81F9-8098EAEB6D34}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{95FC5B67-3C6F-472A-A306-D1C89148138D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95FC5B67-3C6F-472A-A306-D1C89148138D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95FC5B67-3C6F-472A-A306-D1C89148138D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95FC5B67-3C6F-472A-A306-D1C89148138D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD07638F-C0A9-44A1-81F9-8098EAEB6D34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD07638F-C0A9-44A1-81F9-8098EAEB6D34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD07638F-C0A9-44A1-81F9-8098EAEB6D34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD07638F-C0A9-44A1-81F9-8098EAEB6D34}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

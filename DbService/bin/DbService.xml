@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ConnectionStrings db="excel">
+	<ConnectionString db="mysql" provider="MySql.Data.MySqlClient"> 
+		Server=localhost;Port=3306;Database=zenointel;Uid=root;Pwd=root;
+	</ConnectionString>
+	<ConnectionString db="text" provider="System.Data.OleDb">
+		Provider=Microsoft.Jet.OLEDB.4.0;Data Source=.\;Extended Properties="text;HDR=Yes;FMT=Delimited";
+	</ConnectionString>
+	<ConnectionString db="excel" provider="System.Data.OleDb">
+		Provider=Microsoft.Jet.OLEDB.4.0;Data Source=test.xls;Extended Properties="Excel 8.0;HDR=Yes";
+	</ConnectionString>
+</ConnectionStrings>
