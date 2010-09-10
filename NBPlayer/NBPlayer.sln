@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NBPlayer", "NBPlayer\NBPlayer.vcproj", "{676B7051-03D1-445E-9A53-591CCFAD5C05}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PlayerApp", "PlayerApp\PlayerApp.vcproj", "{DAE4E13F-E50A-4DE2-ABDB-D91CEB870091}"
+	ProjectSection(ProjectDependencies) = postProject
+		{676B7051-03D1-445E-9A53-591CCFAD5C05} = {676B7051-03D1-445E-9A53-591CCFAD5C05}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{676B7051-03D1-445E-9A53-591CCFAD5C05}.Debug|Win32.ActiveCfg = Debug|Win32
+		{676B7051-03D1-445E-9A53-591CCFAD5C05}.Debug|Win32.Build.0 = Debug|Win32
+		{676B7051-03D1-445E-9A53-591CCFAD5C05}.Release|Win32.ActiveCfg = Release|Win32
+		{676B7051-03D1-445E-9A53-591CCFAD5C05}.Release|Win32.Build.0 = Release|Win32
+		{DAE4E13F-E50A-4DE2-ABDB-D91CEB870091}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DAE4E13F-E50A-4DE2-ABDB-D91CEB870091}.Debug|Win32.Build.0 = Debug|Win32
+		{DAE4E13F-E50A-4DE2-ABDB-D91CEB870091}.Release|Win32.ActiveCfg = Release|Win32
+		{DAE4E13F-E50A-4DE2-ABDB-D91CEB870091}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
