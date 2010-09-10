@@ -3,19 +3,19 @@
   <Profiles />
   <Settings>
     <Setting Name="Username" Type="System.String" Scope="User">
-      <Value Profile="(Default)">guoqiao@gmail.com</Value>
+      <Value Profile="(Default)">why11221220@gmail.com</Value>
     </Setting>
     <Setting Name="Password" Type="System.String" Scope="User">
-      <Value Profile="(Default)">51649254</Value>
+      <Value Profile="(Default)">89354959</Value>
     </Setting>
     <Setting Name="Nickname" Type="System.String" Scope="User">
-      <Value Profile="(Default)">qguo</Value>
+      <Value Profile="(Default)">Phoebe</Value>
     </Setting>
     <Setting Name="Server" Type="System.String" Scope="User">
       <Value Profile="(Default)">smtp.gmail.com</Value>
     </Setting>
     <Setting Name="DefaultSubject" Type="System.String" Scope="User">
-      <Value Profile="(Default)">hi, I'm phoebe</Value>
+      <Value Profile="(Default)">Re:Re: Audio Visual Equipment</Value>
     </Setting>
     <Setting Name="Port" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">587</Value>

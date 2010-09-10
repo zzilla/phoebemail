@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -156,9 +157,6 @@
             this.listBoxAddresses.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBoxAddresses.FormattingEnabled = true;
             this.listBoxAddresses.ItemHeight = 16;
-            this.listBoxAddresses.Items.AddRange(new object[] {
-            "guoqiao@gmail.com",
-            "qguo@zenointel.com"});
             this.listBoxAddresses.Location = new System.Drawing.Point(4, 19);
             this.listBoxAddresses.Margin = new System.Windows.Forms.Padding(4);
             this.listBoxAddresses.Name = "listBoxAddresses";
@@ -228,6 +226,7 @@
             // splitContainer2.Panel1
             // 
             this.splitContainer2.Panel1.Controls.Add(this.groupBox3);
+            this.splitContainer2.Panel1Collapsed = true;
             // 
             // splitContainer2.Panel2
             // 
@@ -309,7 +308,7 @@
             this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox4.Size = new System.Drawing.Size(513, 360);
+            this.groupBox4.Size = new System.Drawing.Size(513, 439);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Body";
@@ -320,7 +319,7 @@
             this.richTextBoxBody.Location = new System.Drawing.Point(4, 19);
             this.richTextBoxBody.Margin = new System.Windows.Forms.Padding(4);
             this.richTextBoxBody.Name = "richTextBoxBody";
-            this.richTextBoxBody.Size = new System.Drawing.Size(505, 337);
+            this.richTextBoxBody.Size = new System.Drawing.Size(505, 416);
             this.richTextBoxBody.TabIndex = 0;
             this.richTextBoxBody.Text = "";
             // 
@@ -498,6 +497,7 @@
             this.textBoxPassword.Location = new System.Drawing.Point(87, 61);
             this.textBoxPassword.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.PasswordChar = '*';
             this.textBoxPassword.Size = new System.Drawing.Size(263, 22);
             this.textBoxPassword.TabIndex = 5;
             this.textBoxPassword.Text = global::PhoebeMail.Properties.Settings.Default.Password;
@@ -571,12 +571,13 @@
             this.ClientSize = new System.Drawing.Size(792, 566);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PhoebeMail";
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
