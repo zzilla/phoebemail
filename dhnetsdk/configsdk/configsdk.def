@@ -1,0 +1,10 @@
+ ; dhconfigsdk.def : Declares the module parameters for the DLL.
+
+LIBRARY      "dhconfigsdk"
+DESCRIPTION  'dhconfigsdk Windows Dynamic Link Library'
+
+EXPORTS
+    ; Explicit exports can go here
+	CLIENT_ParseData					@1;
+	CLIENT_PacketData					@2;
+

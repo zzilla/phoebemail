@@ -1,0 +1,466 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: dvr - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\Users\SENSEF~1\AppData\Local\Temp\RSP6201.tmp" with contents
+[
+/nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "DVR_EXPORTS" /FR"Debug/" /Fp"Debug/dvr.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\work\eva\NetSdk\SRC\dvr\devprob.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\dvr.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\dvrinterface.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\Net\Broadcast.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\Net\MulticastSocket.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\Net\SocketCallBack.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\Net\TcpSocket.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\Net\TcpSockServer.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\Net\UdpSocket.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\dvrdevice\dvrmediachannel.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\dvrdevice\dvrpacket_comm.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\dvrdevice\dvrpacket_DDNS.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\dvrdevice\dvrpacket_dvr2.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\dvrdevice\dvrpacket_mobile.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\ParseString.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\dvrdevice\dvrsearchchannel.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\dvrdevice\dvrsearchchannel_DDNS.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\dvrdevice\dvrdownloadchannel.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\dvrdevice\dvrupgradechannel.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\dvrdevice\dvrpreviewchannel.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\dvrdevice\DvrDevice_DDNS.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\dvrdevice\dvrcontrolchannel.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\dvrdevice\dvrconfigchannel.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\dvrdevice\dvrstatiscchannel.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\dvrdevice\dvrtalkchannel.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\dvrdevice\dvruserchannel.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\dvrdevice\dvrtranschannel.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\dvrdevice\dvralarmchannel.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\dvrdevice\dvrsnapchannel.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\dvrdevice\DvrGpsChannel.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\dvrdevice\RequestChannel.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\dvrdevice\DvrNewConfigChannel.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\dvrdevice\dvrchannel.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\dvrdevice\dvrdevice.cpp"
+]
+Creating command line "cl.exe @C:\Users\SENSEF~1\AppData\Local\Temp\RSP6201.tmp" 
+Creating temporary file "C:\Users\SENSEF~1\AppData\Local\Temp\RSP6211.tmp" with contents
+[
+wsock32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /incremental:yes /pdb:"../../Bin/Debug/dvr.pdb" /debug /machine:I386 /out:"../../Bin/Debug/dvr.dll" /implib:"../../Bin/Debug/dvr.lib" /pdbtype:sept 
+.\Debug\Des.obj
+.\Debug\devprob.obj
+.\Debug\dvr.obj
+.\Debug\dvrinterface.obj
+.\Debug\osIndependent.obj
+.\Debug\Broadcast.obj
+.\Debug\MulticastSocket.obj
+.\Debug\SocketCallBack.obj
+.\Debug\TcpSocket.obj
+.\Debug\TcpSockServer.obj
+.\Debug\UdpSocket.obj
+.\Debug\dvrmediachannel.obj
+.\Debug\dvrpacket_comm.obj
+.\Debug\dvrpacket_DDNS.obj
+.\Debug\dvrpacket_dvr2.obj
+.\Debug\dvrpacket_mobile.obj
+.\Debug\ParseString.obj
+.\Debug\dvrsearchchannel.obj
+.\Debug\dvrsearchchannel_DDNS.obj
+.\Debug\dvrdownloadchannel.obj
+.\Debug\dvrupgradechannel.obj
+.\Debug\dvrpreviewchannel.obj
+.\Debug\DvrDevice_DDNS.obj
+.\Debug\dvrcontrolchannel.obj
+.\Debug\dvrconfigchannel.obj
+.\Debug\dvrstatiscchannel.obj
+.\Debug\dvrtalkchannel.obj
+.\Debug\dvruserchannel.obj
+.\Debug\dvrtranschannel.obj
+.\Debug\dvralarmchannel.obj
+.\Debug\dvrsnapchannel.obj
+.\Debug\DvrGpsChannel.obj
+.\Debug\RequestChannel.obj
+.\Debug\DvrNewConfigChannel.obj
+.\Debug\dvrcap.obj
+.\Debug\dvrchannel.obj
+.\Debug\dvrdevice.obj
+.\Debug\dvr.res
+\work\eva\NetSdk\Bin\Debug\TPLayer.lib
+]
+Creating command line "link.exe @C:\Users\SENSEF~1\AppData\Local\Temp\RSP6211.tmp"
+<h3>Output Window</h3>
+Compiling...
+devprob.cpp
+dvr.cpp
+dvrinterface.cpp
+Broadcast.cpp
+MulticastSocket.cpp
+SocketCallBack.cpp
+TcpSocket.cpp
+TcpSockServer.cpp
+UdpSocket.cpp
+dvrmediachannel.cpp
+dvrpacket_comm.cpp
+dvrpacket_DDNS.cpp
+dvrpacket_dvr2.cpp
+dvrpacket_mobile.cpp
+ParseString.cpp
+dvrsearchchannel.cpp
+dvrsearchchannel_DDNS.cpp
+dvrdownloadchannel.cpp
+dvrupgradechannel.cpp
+dvrpreviewchannel.cpp
+DvrDevice_DDNS.cpp
+dvrcontrolchannel.cpp
+dvrconfigchannel.cpp
+dvrstatiscchannel.cpp
+dvrtalkchannel.cpp
+dvruserchannel.cpp
+dvrtranschannel.cpp
+dvralarmchannel.cpp
+dvrsnapchannel.cpp
+DvrGpsChannel.cpp
+RequestChannel.cpp
+DvrNewConfigChannel.cpp
+dvrchannel.cpp
+dvrdevice.cpp
+Linking...
+<h3>
+--------------------Configuration: netsdk - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\Users\SENSEF~1\AppData\Local\Temp\RSP97A3.tmp" with contents
+[
+/nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "NETSDK_EXPORTS" /FR"Debug/" /Fp"Debug/netsdk.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\work\eva\NetSdk\SRC\netsdk\AlarmDeal.cpp"
+"D:\work\eva\NetSdk\SRC\netsdk\AutoRegister.cpp"
+"D:\work\eva\NetSdk\SRC\netsdk\DecoderDevice.cpp"
+"D:\work\eva\NetSdk\SRC\netsdk\DevConfig.cpp"
+"D:\work\eva\NetSdk\SRC\netsdk\DevConfigEx.cpp"
+"D:\work\eva\NetSdk\SRC\netsdk\DevControl.cpp"
+"D:\work\eva\NetSdk\SRC\netsdk\DevNewConfig.cpp"
+"D:\work\eva\NetSdk\SRC\netsdk\GPSSubcrible.cpp"
+"D:\work\eva\NetSdk\SRC\netsdk\Manager.cpp"
+"D:\work\eva\NetSdk\SRC\netsdk\netsdk.cpp"
+"D:\work\eva\NetSdk\SRC\dvr\ParseString.cpp"
+"D:\work\eva\NetSdk\SRC\netsdk\RealPlay.cpp"
+"D:\work\eva\NetSdk\SRC\netsdk\RenderManager.cpp"
+"D:\work\eva\NetSdk\SRC\netsdk\SearchRecordAndPlayBack.cpp"
+"D:\work\eva\NetSdk\SRC\netsdk\ServerSet.cpp"
+"D:\work\eva\NetSdk\SRC\netsdk\SnapPicture.cpp"
+"D:\work\eva\NetSdk\SRC\netsdk\Talk.cpp"
+"D:\work\eva\NetSdk\SRC\netsdk\Timer.cpp"
+"D:\work\eva\NetSdk\SRC\netsdk\TransBurnFile.cpp"
+"D:\work\eva\NetSdk\SRC\netsdk\Utils.cpp"
+"D:\work\eva\NetSdk\SRC\netsdk\Utils_StrParser.cpp"
+"D:\work\eva\NetSdk\SRC\netsdk\VideoRender.cpp"
+"D:\work\eva\NetSdk\SRC\netsdk\NetPlayBack\NetPlayBack.cpp"
+"D:\work\eva\NetSdk\SRC\netsdk\NetPlayBack\NetPlayBackBuffer.cpp"
+]
+Creating command line "cl.exe @C:\Users\SENSEF~1\AppData\Local\Temp\RSP97A3.tmp" 
+Creating temporary file "C:\Users\SENSEF~1\AppData\Local\Temp\RSP97A4.tmp" with contents
+[
+/nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "NETSDK_EXPORTS" /FR"Debug/" /Fp"Debug/netsdk.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\work\eva\NetSdk\SRC\netsdk\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\Users\SENSEF~1\AppData\Local\Temp\RSP97A4.tmp" 
+Creating temporary file "C:\Users\SENSEF~1\AppData\Local\Temp\RSP97A5.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /incremental:yes /pdb:"../../Bin/Debug/netsdk.pdb" /debug /machine:I386 /def:".\netsdk.def" /out:"../../Bin/Debug/netsdk.dll" /implib:"../../Bin/Debug/netsdk.lib" /pdbtype:sept 
+.\Debug\AlarmDeal.obj
+.\Debug\Alaw_encoder.obj
+.\Debug\AutoRegister.obj
+.\Debug\DecoderDevice.obj
+.\Debug\DevConfig.obj
+.\Debug\DevConfigEx.obj
+.\Debug\DevControl.obj
+.\Debug\DevNewConfig.obj
+.\Debug\GPSSubcrible.obj
+.\Debug\Manager.obj
+.\Debug\mutex.obj
+.\Debug\netsdk.obj
+.\Debug\osIndependent.obj
+.\Debug\ParseString.obj
+.\Debug\ReadWriteMutex.obj
+.\Debug\RealPlay.obj
+.\Debug\RenderManager.obj
+.\Debug\SearchRecordAndPlayBack.obj
+.\Debug\ServerSet.obj
+.\Debug\SnapPicture.obj
+.\Debug\StdAfx.obj
+.\Debug\Talk.obj
+.\Debug\Timer.obj
+.\Debug\TransBurnFile.obj
+.\Debug\Utils.obj
+.\Debug\Utils_StrParser.obj
+.\Debug\VideoRender.obj
+.\Debug\NetPlayBack.obj
+.\Debug\NetPlayBackBuffer.obj
+.\Debug\netsdk.res
+.\depend\amrnb.lib
+.\depend\playsdk.lib
+\work\eva\NetSdk\Bin\Debug\dvr.lib
+]
+Creating command line "link.exe @C:\Users\SENSEF~1\AppData\Local\Temp\RSP97A5.tmp"
+<h3>Output Window</h3>
+Compiling...
+StdAfx.cpp
+Compiling...
+AlarmDeal.cpp
+AutoRegister.cpp
+DecoderDevice.cpp
+DevConfig.cpp
+DevConfigEx.cpp
+DevControl.cpp
+DevNewConfig.cpp
+GPSSubcrible.cpp
+Manager.cpp
+netsdk.cpp
+ParseString.cpp
+RealPlay.cpp
+RenderManager.cpp
+SearchRecordAndPlayBack.cpp
+ServerSet.cpp
+SnapPicture.cpp
+Talk.cpp
+d:\work\eva\netsdk\src\netsdk\talk.cpp(708) : warning C4305: '+=' : truncation from 'const int' to 'char'
+d:\work\eva\netsdk\src\netsdk\talk.cpp(1214) : warning C4305: '=' : truncation from 'const int' to 'char'
+d:\work\eva\netsdk\src\netsdk\talk.cpp(1214) : warning C4309: '=' : truncation of constant value
+d:\work\eva\netsdk\src\netsdk\talk.cpp(1282) : warning C4305: '=' : truncation from 'const int' to 'char'
+d:\work\eva\netsdk\src\netsdk\talk.cpp(1282) : warning C4309: '=' : truncation of constant value
+d:\work\eva\netsdk\src\netsdk\talk.cpp(1306) : warning C4305: '=' : truncation from 'const int' to 'char'
+d:\work\eva\netsdk\src\netsdk\talk.cpp(1306) : warning C4309: '=' : truncation of constant value
+d:\work\eva\netsdk\src\netsdk\talk.cpp(1327) : warning C4305: '=' : truncation from 'const int' to 'char'
+d:\work\eva\netsdk\src\netsdk\talk.cpp(1327) : warning C4309: '=' : truncation of constant value
+Timer.cpp
+TransBurnFile.cpp
+Utils.cpp
+Utils_StrParser.cpp
+VideoRender.cpp
+NetPlayBack.cpp
+NetPlayBackBuffer.cpp
+Linking...
+   Creating library ../../Bin/Debug/netsdk.lib and object ../../Bin/Debug/netsdk.exp
+LINK : warning LNK4098: defaultlib "LIBC" conflicts with use of other libs; use /NODEFAULTLIB:library
+<h3>
+--------------------Configuration: NetSDKDemo - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\Users\SENSEF~1\AppData\Local\Temp\RSPBE77.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/NetSDKDemo.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\work\eva\NetSdk\SRC\Demo\AddDeviceDlg.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\AdvanceBtnPannel.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\AlarmCtrlDlg.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\AudioBroadcastDlg.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\AutoMaintenance.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\BSWndContainer.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\ClientState.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\ColorPannel.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\ConfigAlarm.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\ConfigAlarmAlarm.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\ConfigAlarmBlind.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\ConfigAlarmDisk.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\ConfigAlarmMotion.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\ConfigAlarmMotionArea.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\ConfigAlarmMotionAreaBlock.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\ConfigAlarmVlost.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\ConfigChannel.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\ConfigComm.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\ConfigMainDlg.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\ConfigNetwork.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\ConfigRecord.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\ConfigServer.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\CycleChild.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\CycleMonitor.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\DDNS_QueryIP.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\DeviceWorkState.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\DevMgr.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\DiskControl.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\DownloadByTime.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\ExButton.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\ExSliderCtrl.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\ExtPtzCtrl.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\font.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\NetSDKDemo.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\NetSDKDemoDlg.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\NetUpgrade.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\NormalBtnPannel.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\PlayBackByTime.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\PlayCtrlPannel.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\PlayWnd.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\PreviewParmsDlg.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\PtzMenu.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\PTZPannel.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\RecordCtrlDlg.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\RuntimeMsgPannel.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\SaveDataPannel.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\ScreenPannel.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\SearchRecord.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\SelectPannel.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\setdeviceconfig.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\SplitInfoDlg.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\SystemConfig.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\TransCom.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\User_AddGroup.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\User_AddUser.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\User_ModifyGroup.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\User_ModifyPsw.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\User_ModifyUser.cpp"
+"D:\work\eva\NetSdk\SRC\Demo\UserManage.cpp"
+]
+Creating command line "cl.exe @C:\Users\SENSEF~1\AppData\Local\Temp\RSPBE77.tmp" 
+Creating temporary file "C:\Users\SENSEF~1\AppData\Local\Temp\RSPBE78.tmp" with contents
+[
+/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Debug/" /Fp"Debug/NetSDKDemo.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\work\eva\NetSdk\SRC\Demo\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\Users\SENSEF~1\AppData\Local\Temp\RSPBE78.tmp" 
+Creating temporary file "C:\Users\SENSEF~1\AppData\Local\Temp\RSPBE79.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:yes /pdb:"Debug/NetSDKDemo.pdb" /debug /machine:I386 /out:"../../Bin/Debug/NetSDKDemo.exe" /pdbtype:sept 
+.\Debug\AddDeviceDlg.obj
+.\Debug\AdvanceBtnPannel.obj
+.\Debug\AlarmCtrlDlg.obj
+.\Debug\AudioBroadcastDlg.obj
+.\Debug\AutoMaintenance.obj
+.\Debug\BSWndContainer.obj
+.\Debug\ClientState.obj
+.\Debug\ColorPannel.obj
+.\Debug\ConfigAlarm.obj
+.\Debug\ConfigAlarmAlarm.obj
+.\Debug\ConfigAlarmBlind.obj
+.\Debug\ConfigAlarmDisk.obj
+.\Debug\ConfigAlarmMotion.obj
+.\Debug\ConfigAlarmMotionArea.obj
+.\Debug\ConfigAlarmMotionAreaBlock.obj
+.\Debug\ConfigAlarmVlost.obj
+.\Debug\ConfigChannel.obj
+.\Debug\ConfigComm.obj
+.\Debug\ConfigMainDlg.obj
+.\Debug\ConfigNetwork.obj
+.\Debug\ConfigRecord.obj
+.\Debug\ConfigServer.obj
+.\Debug\CycleChild.obj
+.\Debug\CycleMonitor.obj
+.\Debug\DDNS_QueryIP.obj
+.\Debug\DeviceWorkState.obj
+.\Debug\DevMgr.obj
+.\Debug\DiskControl.obj
+.\Debug\DownloadByTime.obj
+.\Debug\ExButton.obj
+.\Debug\ExSliderCtrl.obj
+.\Debug\ExtPtzCtrl.obj
+.\Debug\font.obj
+.\Debug\NetSDKDemo.obj
+.\Debug\NetSDKDemoDlg.obj
+.\Debug\NetUpgrade.obj
+.\Debug\NormalBtnPannel.obj
+.\Debug\PlayBackByTime.obj
+.\Debug\PlayCtrlPannel.obj
+.\Debug\PlayWnd.obj
+.\Debug\PreviewParmsDlg.obj
+.\Debug\PtzMenu.obj
+.\Debug\PTZPannel.obj
+.\Debug\RecordCtrlDlg.obj
+.\Debug\RuntimeMsgPannel.obj
+.\Debug\SaveDataPannel.obj
+.\Debug\ScreenPannel.obj
+.\Debug\SearchRecord.obj
+.\Debug\SelectPannel.obj
+.\Debug\setdeviceconfig.obj
+.\Debug\SplitInfoDlg.obj
+.\Debug\StdAfx.obj
+.\Debug\SystemConfig.obj
+.\Debug\TransCom.obj
+.\Debug\User_AddGroup.obj
+.\Debug\User_AddUser.obj
+.\Debug\User_ModifyGroup.obj
+.\Debug\User_ModifyPsw.obj
+.\Debug\User_ModifyUser.obj
+.\Debug\UserManage.obj
+.\Debug\NetSDKDemo.res
+.\Depend\netsdk.lib
+\work\eva\NetSdk\Bin\Debug\netsdk.lib
+]
+Creating command line "link.exe @C:\Users\SENSEF~1\AppData\Local\Temp\RSPBE79.tmp"
+<h3>Output Window</h3>
+Compiling...
+StdAfx.cpp
+Compiling...
+AddDeviceDlg.cpp
+AdvanceBtnPannel.cpp
+AlarmCtrlDlg.cpp
+AudioBroadcastDlg.cpp
+AutoMaintenance.cpp
+BSWndContainer.cpp
+ClientState.cpp
+ColorPannel.cpp
+ConfigAlarm.cpp
+ConfigAlarmAlarm.cpp
+ConfigAlarmBlind.cpp
+ConfigAlarmDisk.cpp
+ConfigAlarmMotion.cpp
+ConfigAlarmMotionArea.cpp
+ConfigAlarmMotionAreaBlock.cpp
+ConfigAlarmVlost.cpp
+ConfigChannel.cpp
+ConfigComm.cpp
+ConfigMainDlg.cpp
+ConfigNetwork.cpp
+Generating Code...
+Compiling...
+ConfigRecord.cpp
+ConfigServer.cpp
+CycleChild.cpp
+CycleMonitor.cpp
+DDNS_QueryIP.cpp
+DeviceWorkState.cpp
+DevMgr.cpp
+DiskControl.cpp
+DownloadByTime.cpp
+D:\work\eva\NetSdk\SRC\Demo\DownloadByTime.cpp(89) : warning C4101: 'nDev' : unreferenced local variable
+D:\work\eva\NetSdk\SRC\Demo\DownloadByTime.cpp(91) : warning C4101: 'nPos' : unreferenced local variable
+ExButton.cpp
+ExSliderCtrl.cpp
+ExtPtzCtrl.cpp
+font.cpp
+NetSDKDemo.cpp
+NetSDKDemoDlg.cpp
+NetUpgrade.cpp
+NormalBtnPannel.cpp
+PlayBackByTime.cpp
+PlayCtrlPannel.cpp
+PlayWnd.cpp
+Generating Code...
+Compiling...
+PreviewParmsDlg.cpp
+PtzMenu.cpp
+PTZPannel.cpp
+RecordCtrlDlg.cpp
+RuntimeMsgPannel.cpp
+SaveDataPannel.cpp
+ScreenPannel.cpp
+SearchRecord.cpp
+SelectPannel.cpp
+setdeviceconfig.cpp
+SplitInfoDlg.cpp
+SystemConfig.cpp
+TransCom.cpp
+User_AddGroup.cpp
+User_AddUser.cpp
+User_ModifyGroup.cpp
+User_ModifyPsw.cpp
+User_ModifyUser.cpp
+UserManage.cpp
+Generating Code...
+Linking...
+
+
+
+<h3>Results</h3>
+NetSDKDemo.exe - 0 error(s), 12 warning(s)
+</pre>
+</body>
+</html>
