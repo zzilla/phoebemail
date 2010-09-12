@@ -182,11 +182,11 @@ namespace PhoebeMail
                 m_smtpClient = client;
                 m_mailMessage = msg;
                 m_addresses = addresses;
-                m_begin = DateTime.Now;
             }
 
             public void Send(BackgroundWorker worker)
             {
+                m_begin = DateTime.Now;
                 foreach (object item in m_addresses)
                 {
                     if (worker.CancellationPending)
@@ -200,6 +200,7 @@ namespace PhoebeMail
 
                     try
                     {
+                        worker.ReportProgress((int)(m_done / m_addresses.Length), this);
                         m_smtpClient.Send(m_mailMessage);
                     }
                     catch (System.Exception)
@@ -208,10 +209,10 @@ namespace PhoebeMail
                     }
                     finally
                     {
-                        ++m_done;
-                        worker.ReportProgress((int)(m_done / m_addresses.Length), this);
+                        ++m_done;            
                     }
                 }
+                m_end = DateTime.Now;
             }
         }
 
@@ -223,11 +224,13 @@ namespace PhoebeMail
             {
                 m_timer.Stop();
                 m_timer.Enabled = false;
+                OnDone();
                 return;
             }
             else if (backgroundWorkerMailSender.IsBusy)
             {
                 backgroundWorkerMailSender.CancelAsync();
+                OnDone();
                 return;
             }
 
@@ -336,22 +339,23 @@ namespace PhoebeMail
 
         private void OnDone()
         {
+            Text = m_formText;
             buttonSend.Text = m_buttonText;
             buttonQuit.Enabled = true;
-
-            job.m_end = DateTime.Now;
 
             StringBuilder sum = new StringBuilder();
             sum.AppendFormat("send mail finished, total = {0}, done = {1}, fail = {2}\n", job.m_addresses.Length, job.m_done, job.m_fail);
             sum.AppendFormat("begin at {0}\n", job.m_begin.ToString("yyyy-MM-dd HH:mm:ss"));
             sum.AppendFormat("end   at {0}\n", job.m_end.ToString("yyyy-MM-dd HH:mm:ss"));
 
-            TimeSpan span = job.m_end.Subtract(job.m_begin);
-            sum.AppendFormat("average {0}/{1} = {2} seconds\n", (int)span.TotalSeconds, job.m_done, (int)(span.TotalSeconds / job.m_done));
+            if (job.m_done > 0)
+            {
+                TimeSpan span = job.m_end.Subtract(job.m_begin);
+                int seconds = (int)(span.TotalSeconds + 0.5);
+                sum.AppendFormat("average {0}/{1} = {2} seconds\n", seconds, job.m_done, seconds / job.m_done);
+            }
 
             ShowInfomation(sum.ToString());
-
-            Text = m_formText;
         }
 
         private void Timeout(Object sender, System.Timers.ElapsedEventArgs e)
