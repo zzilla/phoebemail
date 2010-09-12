@@ -55,6 +55,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBoxSubject = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.dateTimePickerTimedSend = new System.Windows.Forms.DateTimePicker();
+            this.checkBoxTimedSend = new System.Windows.Forms.CheckBox();
             this.buttonQuit = new System.Windows.Forms.Button();
             this.buttonSend = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -75,8 +77,6 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.backgroundWorkerMailSender = new System.ComponentModel.BackgroundWorker();
-            this.checkBoxTimedSend = new System.Windows.Forms.CheckBox();
-            this.dateTimePickerTimedSend = new System.Windows.Forms.DateTimePicker();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -165,6 +165,7 @@
             this.listBoxAddresses.Name = "listBoxAddresses";
             this.listBoxAddresses.Size = new System.Drawing.Size(250, 500);
             this.listBoxAddresses.TabIndex = 0;
+            this.listBoxAddresses.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxAddresses_MouseDoubleClick);
             // 
             // contextMenuStripAddresses
             // 
@@ -197,6 +198,7 @@
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
             this.addToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.addToolStripMenuItem.Text = "Add...";
+            this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
@@ -210,6 +212,7 @@
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.editToolStripMenuItem.Text = "Edit...";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // clearAllToolStripMenuItem
             // 
@@ -360,6 +363,27 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(513, 40);
             this.panel2.TabIndex = 0;
+            // 
+            // dateTimePickerTimedSend
+            // 
+            this.dateTimePickerTimedSend.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            this.dateTimePickerTimedSend.Enabled = false;
+            this.dateTimePickerTimedSend.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePickerTimedSend.Location = new System.Drawing.Point(82, 10);
+            this.dateTimePickerTimedSend.Name = "dateTimePickerTimedSend";
+            this.dateTimePickerTimedSend.Size = new System.Drawing.Size(153, 22);
+            this.dateTimePickerTimedSend.TabIndex = 3;
+            // 
+            // checkBoxTimedSend
+            // 
+            this.checkBoxTimedSend.AutoSize = true;
+            this.checkBoxTimedSend.Location = new System.Drawing.Point(4, 12);
+            this.checkBoxTimedSend.Name = "checkBoxTimedSend";
+            this.checkBoxTimedSend.Size = new System.Drawing.Size(71, 20);
+            this.checkBoxTimedSend.TabIndex = 2;
+            this.checkBoxTimedSend.Text = "send at";
+            this.checkBoxTimedSend.UseVisualStyleBackColor = true;
+            this.checkBoxTimedSend.CheckedChanged += new System.EventHandler(this.checkBoxTimedSend_CheckedChanged);
             // 
             // buttonQuit
             // 
@@ -577,27 +601,6 @@
             this.backgroundWorkerMailSender.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerMailSender_DoWork);
             this.backgroundWorkerMailSender.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerMailSender_RunWorkerCompleted);
             this.backgroundWorkerMailSender.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerMailSender_ProgressChanged);
-            // 
-            // checkBoxTimedSend
-            // 
-            this.checkBoxTimedSend.AutoSize = true;
-            this.checkBoxTimedSend.Location = new System.Drawing.Point(4, 12);
-            this.checkBoxTimedSend.Name = "checkBoxTimedSend";
-            this.checkBoxTimedSend.Size = new System.Drawing.Size(71, 20);
-            this.checkBoxTimedSend.TabIndex = 2;
-            this.checkBoxTimedSend.Text = "send at";
-            this.checkBoxTimedSend.UseVisualStyleBackColor = true;
-            this.checkBoxTimedSend.CheckedChanged += new System.EventHandler(this.checkBoxTimedSend_CheckedChanged);
-            // 
-            // dateTimePickerTimedSend
-            // 
-            this.dateTimePickerTimedSend.CustomFormat = "yyyy-MM-dd HH:mm:ss";
-            this.dateTimePickerTimedSend.Enabled = false;
-            this.dateTimePickerTimedSend.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePickerTimedSend.Location = new System.Drawing.Point(82, 10);
-            this.dateTimePickerTimedSend.Name = "dateTimePickerTimedSend";
-            this.dateTimePickerTimedSend.Size = new System.Drawing.Size(153, 22);
-            this.dateTimePickerTimedSend.TabIndex = 3;
             // 
             // MainForm
             // 

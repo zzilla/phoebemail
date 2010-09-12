@@ -110,6 +110,11 @@ namespace PhoebeMail
 
         private void importToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            OnImportAddress();
+        }
+
+        private void OnImportAddress()
+        {
             DialogResult r = openFileDialog1.ShowDialog();
             if (r == DialogResult.OK)
             {
@@ -129,7 +134,6 @@ namespace PhoebeMail
                 }
             }
         }
-
         private void exportToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DialogResult r = saveFileDialog1.ShowDialog();
@@ -368,6 +372,66 @@ namespace PhoebeMail
         private void checkBoxTimedSend_CheckedChanged(object sender, EventArgs e)
         {
             dateTimePickerTimedSend.Enabled = checkBoxTimedSend.Checked;
+        }
+
+        private void addToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EmailForm form = new EmailForm();
+            DialogResult r = form.ShowDialog();
+            if (r == DialogResult.OK)
+            {
+                if (IsEmailAddress(form.GetAddress()))
+                {
+                    listBoxAddresses.Items.Add(form.GetAddress());
+                }
+                else
+                {
+                    ShowWarning("invalid email address!");
+                }
+            }
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OnEditAddress();
+        }
+
+        private void listBoxAddresses_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            
+            if (listBoxAddresses.SelectedIndices.Count > 0)
+            {
+                OnEditAddress();
+            }
+            else
+            {
+                OnImportAddress();
+            }
+        }
+
+        private void OnEditAddress()
+        {
+            if (listBoxAddresses.SelectedIndices.Count > 0)
+            {
+                EmailForm form = new EmailForm();
+                string old = listBoxAddresses.SelectedItems[0].ToString();
+                form.SetAddress(old);
+                DialogResult r = form.ShowDialog();
+                if (r == DialogResult.OK)
+                {
+                    string newAddress = form.GetAddress();
+
+                    if (IsEmailAddress(newAddress) && (newAddress != old))
+                    {
+                        listBoxAddresses.Items.RemoveAt(listBoxAddresses.SelectedIndices[0]);
+                        listBoxAddresses.Items.Add(newAddress);
+                    }
+                    else
+                    {
+                        ShowWarning("invalid email address!");
+                    }
+                }
+            }
         }
     }
 }
