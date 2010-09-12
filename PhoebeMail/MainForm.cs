@@ -75,6 +75,7 @@ namespace PhoebeMail
             Settings.Default.Nickname = textBoxNickname.Text;
             Settings.Default.Server = textBoxServer.Text;
             Settings.Default.Port = numericUpDownPort.Value;
+            Settings.Default.Ssl = checkBoxSsl.Checked;
             Settings.Default.DefaultSubject = textBoxDefaultSubject.Text;
             Settings.Default.Save();
         }
@@ -276,7 +277,7 @@ namespace PhoebeMail
 
             SmtpClient smtpClient = new SmtpClient();
             smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-            smtpClient.EnableSsl = true;
+            smtpClient.EnableSsl = checkBoxSsl.Checked;
             smtpClient.Credentials = new NetworkCredential(textBoxUsername.Text, textBoxPassword.Text);
             smtpClient.Host = textBoxServer.Text;
             smtpClient.Port = (int)numericUpDownPort.Value;

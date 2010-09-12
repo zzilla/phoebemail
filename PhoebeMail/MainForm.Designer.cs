@@ -60,6 +60,7 @@
             this.buttonQuit = new System.Windows.Forms.Button();
             this.buttonSend = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.checkBoxSsl = new System.Windows.Forms.CheckBox();
             this.numericUpDownPort = new System.Windows.Forms.NumericUpDown();
             this.richTextBoxDefaultBody = new System.Windows.Forms.RichTextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -411,6 +412,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.checkBoxSsl);
             this.tabPage2.Controls.Add(this.numericUpDownPort);
             this.tabPage2.Controls.Add(this.richTextBoxDefaultBody);
             this.tabPage2.Controls.Add(this.label7);
@@ -433,6 +435,19 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Setting";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxSsl
+            // 
+            this.checkBoxSsl.AutoSize = true;
+            this.checkBoxSsl.Checked = global::PhoebeMail.Properties.Settings.Default.Ssl;
+            this.checkBoxSsl.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxSsl.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::PhoebeMail.Properties.Settings.Default, "Ssl", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.checkBoxSsl.Location = new System.Drawing.Point(380, 64);
+            this.checkBoxSsl.Name = "checkBoxSsl";
+            this.checkBoxSsl.Size = new System.Drawing.Size(98, 20);
+            this.checkBoxSsl.TabIndex = 15;
+            this.checkBoxSsl.Text = "Enable SSL";
+            this.checkBoxSsl.UseVisualStyleBackColor = true;
             // 
             // numericUpDownPort
             // 
@@ -689,6 +704,7 @@
         private System.ComponentModel.BackgroundWorker backgroundWorkerMailSender;
         private System.Windows.Forms.CheckBox checkBoxTimedSend;
         private System.Windows.Forms.DateTimePicker dateTimePickerTimedSend;
+        private System.Windows.Forms.CheckBox checkBoxSsl;
     }
 }
 
