@@ -380,13 +380,19 @@ namespace PhoebeMail
             DialogResult r = form.ShowDialog();
             if (r == DialogResult.OK)
             {
-                if (IsEmailAddress(form.GetAddress()))
+                string address = form.GetAddress();
+
+                if (!IsEmailAddress(address))
                 {
-                    listBoxAddresses.Items.Add(form.GetAddress());
+                    ShowWarning("invalid email address!");                   
+                }
+                else if (listBoxAddresses.Items.Contains(address))
+                {
+                    ShowWarning("email address existed!");
                 }
                 else
                 {
-                    ShowWarning("invalid email address!");
+                   listBoxAddresses.Items.Add(form.GetAddress());
                 }
             }
         }
@@ -421,14 +427,22 @@ namespace PhoebeMail
                 {
                     string newAddress = form.GetAddress();
 
-                    if (IsEmailAddress(newAddress) && (newAddress != old))
+                    if (!IsEmailAddress(newAddress) && (newAddress != old))
                     {
-                        listBoxAddresses.Items.RemoveAt(listBoxAddresses.SelectedIndices[0]);
-                        listBoxAddresses.Items.Add(newAddress);
+                        ShowWarning("invalid email address!");
+                    }
+                    else if (listBoxAddresses.Items.Contains(newAddress))
+                    {
+                        ShowWarning("email address existed!");
+                    }
+                    else if (newAddress == old)
+                    {
+                        //Do Nothing
                     }
                     else
                     {
-                        ShowWarning("invalid email address!");
+                        listBoxAddresses.Items.RemoveAt(listBoxAddresses.SelectedIndices[0]);
+                        listBoxAddresses.Items.Add(newAddress);
                     }
                 }
             }
