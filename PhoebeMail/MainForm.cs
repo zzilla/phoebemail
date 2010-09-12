@@ -25,7 +25,7 @@ namespace PhoebeMail
 
         public MainForm()
         {
-            InitializeComponent();  
+            InitializeComponent();
             m_formText = Text;
             m_buttonText = buttonSend.Text;
 
@@ -66,6 +66,8 @@ namespace PhoebeMail
             DateTime now = DateTime.Now;
 
             dateTimePickerTimedSend.Value = new DateTime(now.Year, now.Month, now.Day, 21, 0, 0);
+
+            LoadAccounts();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -78,6 +80,8 @@ namespace PhoebeMail
             Settings.Default.Ssl = checkBoxSsl.Checked;
             Settings.Default.DefaultSubject = textBoxDefaultSubject.Text;
             Settings.Default.Save();
+
+            SaveAccounts();
         }
 
         private void buttonQuit_Click(object sender, EventArgs e)
@@ -172,7 +176,7 @@ namespace PhoebeMail
 
         class MailJob
         {
-            public SmtpClient  m_smtpClient;
+            public SmtpClient m_smtpClient;
             public MailMessage m_mailMessage;
             public object[] m_addresses;
             public DateTime m_begin;
@@ -214,7 +218,7 @@ namespace PhoebeMail
                     }
                     finally
                     {
-                        ++m_done;            
+                        ++m_done;
                     }
                 }
                 m_end = DateTime.Now;
@@ -239,24 +243,9 @@ namespace PhoebeMail
                 return;
             }
 
-            if (String.IsNullOrEmpty(textBoxUsername.Text))
+            if (comboBoxAccounts.SelectedItem == null)
             {
-                ShowWarning("username can not be empty!");
-                return;
-            }
-            else if (!IsEmailAddress(textBoxUsername.Text))
-            {
-                ShowWarning("username is not a valid email address!");
-                return;
-            }
-            else if (String.IsNullOrEmpty(textBoxPassword.Text))
-            {
-                ShowWarning("password can not be empty!");
-                return;
-            }
-            else if (String.IsNullOrEmpty(textBoxServer.Text))
-            {
-                ShowWarning("server can not be empty!");
+                ShowWarning("account can not be empty!");
                 return;
             }
             else if (String.IsNullOrEmpty(textBoxSubject.Text))
@@ -275,15 +264,19 @@ namespace PhoebeMail
                 return;
             }
 
+            TagedItem item = (TagedItem)comboBoxAccounts.SelectedItem;
+            ListViewItem lvi = item.item;
+            AccountForm f = (AccountForm)lvi.Tag;
+
             SmtpClient smtpClient = new SmtpClient();
             smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-            smtpClient.EnableSsl = checkBoxSsl.Checked;
-            smtpClient.Credentials = new NetworkCredential(textBoxUsername.Text, textBoxPassword.Text);
-            smtpClient.Host = textBoxServer.Text;
-            smtpClient.Port = (int)numericUpDownPort.Value;
+            smtpClient.EnableSsl = f.SslEnabled();
+            smtpClient.Credentials = new NetworkCredential(f.GetUsername(), f.GetPassword());
+            smtpClient.Host = f.GetServer();
+            smtpClient.Port = f.GetPort();
 
             MailMessage mailMessage = new MailMessage();
-            mailMessage.From = new MailAddress(textBoxUsername.Text, textBoxNickname.Text);
+            mailMessage.From = new MailAddress(f.GetUsername(), f.GetNickname());
             mailMessage.SubjectEncoding = Encoding.GetEncoding("GB2312");
             mailMessage.BodyEncoding = Encoding.GetEncoding("GB2312");
             mailMessage.Subject = textBoxSubject.Text;
@@ -385,7 +378,7 @@ namespace PhoebeMail
 
                 if (!IsEmailAddress(address))
                 {
-                    ShowWarning("invalid email address!");                   
+                    ShowWarning("invalid email address!");
                 }
                 else if (listBoxAddresses.Items.Contains(address))
                 {
@@ -393,7 +386,7 @@ namespace PhoebeMail
                 }
                 else
                 {
-                   listBoxAddresses.Items.Add(form.GetAddress());
+                    listBoxAddresses.Items.Add(form.GetAddress());
                 }
             }
         }
@@ -405,7 +398,7 @@ namespace PhoebeMail
 
         private void listBoxAddresses_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            
+
             if (listBoxAddresses.SelectedIndices.Count > 0)
             {
                 OnEditAddress();
@@ -446,6 +439,216 @@ namespace PhoebeMail
                         listBoxAddresses.Items.Add(newAddress);
                     }
                 }
+            }
+        }
+
+        private void addAccountToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AccountForm f = new AccountForm();
+            while (f.ShowDialog() == DialogResult.OK)
+            {
+                string username = f.GetUsername();
+
+                if (string.IsNullOrEmpty(username))
+                {
+                    ShowWarning("username can't be empty!");
+                }
+                else if (!IsEmailAddress(username))
+                {
+                    ShowWarning("email address is not valid!");
+                }
+                else if (string.IsNullOrEmpty(f.GetPassword()))
+                {
+                    ShowWarning("password can't be empty!");
+                }
+                else if (string.IsNullOrEmpty(f.GetNickname()))
+                {
+                    ShowWarning("nickname can't be empty!");
+                }
+                else if (string.IsNullOrEmpty(f.GetServer()))
+                {
+                    ShowWarning("server can't be empty!");
+                }
+                else
+                {
+                    ListViewItem item = new ListViewItem();
+                    item.Text = f.GetUsername();
+                    StringBuilder b = new StringBuilder();
+                    foreach (char c in f.GetPassword())
+                    {
+                        b.Append("*");
+                    }
+                    item.SubItems.Add(b.ToString());
+                    item.SubItems.Add(f.GetNickname());
+                    item.SubItems.Add(f.GetServer());
+                    item.SubItems.Add(f.GetPort().ToString());
+                    item.SubItems.Add(f.SslEnabled().ToString());
+                    item.Tag = f;//为方便， 先这样
+                    listViewAccounts.Items.Add(item);
+                    //add success.
+                    break;
+                }
+            }
+        }
+
+        private void deleteAccountToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (int index in listViewAccounts.SelectedIndices)
+            {
+                listViewAccounts.Items.RemoveAt(index);
+            }
+        }
+
+        private void clearAccountToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            listViewAccounts.Items.Clear();
+        }
+
+        private void editAccountToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OnEditAccount();
+        }
+
+        private void listViewAccounts_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            OnEditAccount();
+        }
+
+        private void OnEditAccount()
+        {
+            if (listViewAccounts.SelectedItems.Count > 0)
+            {
+                ListViewItem item = listViewAccounts.SelectedItems[0];
+                AccountForm f = (AccountForm)item.Tag;
+                while (f.ShowDialog() == DialogResult.OK)
+                {
+                    string username = f.GetUsername();
+
+                    if (string.IsNullOrEmpty(username))
+                    {
+                        ShowWarning("username can't be empty!");
+                    }
+                    else if (!IsEmailAddress(username))
+                    {
+                        ShowWarning("email address is not valid!");
+                    }
+                    else if (string.IsNullOrEmpty(f.GetPassword()))
+                    {
+                        ShowWarning("password can't be empty!");
+                    }
+                    else if (string.IsNullOrEmpty(f.GetNickname()))
+                    {
+                        ShowWarning("nickname can't be empty!");
+                    }
+                    else if (string.IsNullOrEmpty(f.GetServer()))
+                    {
+                        ShowWarning("server can't be empty!");
+                    }
+                    else
+                    {
+                        item.SubItems.Clear();
+                        item.Text = f.GetUsername();
+                        StringBuilder b = new StringBuilder();
+                        foreach (char c in f.GetPassword())
+                        {
+                            b.Append("*");
+                        }
+                        item.SubItems.Add(b.ToString());
+                        item.SubItems.Add(f.GetNickname());
+                        item.SubItems.Add(f.GetServer());
+                        item.SubItems.Add(f.GetPort().ToString());
+                        item.SubItems.Add(f.SslEnabled().ToString());
+                        item.Tag = f;//为方便， 先这样
+                        listViewAccounts.Update();
+                        //add success.
+                        break;
+                    }
+                }
+            }
+        }
+
+        private string m_accounts = "accounts.txt";
+
+        private string Encrypt(string text)
+        {
+            return Convert.ToBase64String(Encoding.Unicode.GetBytes(text));
+        }
+
+        private string Decrypt(string text)
+        {
+            return Encoding.Unicode.GetString(Convert.FromBase64String(text));
+        }
+
+        private void SaveAccounts()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            foreach (ListViewItem item in listViewAccounts.Items)
+            {
+                AccountForm f = (AccountForm)item.Tag;
+                sb.AppendFormat("{0},{1},{2},{3},{4},{5}\n",
+                    f.GetUsername(), Encrypt(f.GetPassword()), f.GetNickname(), f.GetServer(), f.GetPort(), f.SslEnabled());
+            }
+
+            File.WriteAllText(m_accounts, sb.ToString());
+        }
+
+        private void LoadAccounts()
+        {
+            if (File.Exists(m_accounts))
+            {
+                string[] lines = File.ReadAllLines(m_accounts);
+
+                foreach (string line in lines)
+                {
+                    if (string.IsNullOrEmpty(line))
+                    {
+                        continue;
+                    }
+
+                    string[] parts = line.Split(',');
+                    parts[1] = Decrypt(parts[1]);
+
+                    AccountForm f = new AccountForm(parts);
+
+                    ListViewItem item = new ListViewItem();
+                    item.Text = f.GetUsername();
+                    StringBuilder b = new StringBuilder();
+                    foreach (char c in f.GetPassword())
+                    {
+                        b.Append("*");
+                    }
+                    item.SubItems.Add(b.ToString());
+                    item.SubItems.Add(f.GetNickname());
+                    item.SubItems.Add(f.GetServer());
+                    item.SubItems.Add(f.GetPort().ToString());
+                    item.SubItems.Add(f.SslEnabled().ToString());
+                    item.Tag = f;//为方便， 先这样
+                    listViewAccounts.Items.Add(item);
+                }
+            }
+        }
+
+        class TagedItem
+        {
+            public TagedItem(ListViewItem item)
+            {
+                this.item = item;
+            }
+
+            public ListViewItem item;
+
+            public override string ToString()
+            {
+                return item.Text;
+            }
+        }
+
+        private void comboBoxAccounts_DropDown(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in listViewAccounts.Items)
+            {
+                comboBoxAccounts.Items.Add(new TagedItem(item));
             }
         }
     }
