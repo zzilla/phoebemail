@@ -74,6 +74,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.backgroundWorkerMailSender = new System.ComponentModel.BackgroundWorker();
+            this.checkBoxTimedSend = new System.Windows.Forms.CheckBox();
+            this.dateTimePickerTimedSend = new System.Windows.Forms.DateTimePicker();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -173,45 +176,45 @@
             this.editToolStripMenuItem,
             this.clearAllToolStripMenuItem});
             this.contextMenuStripAddresses.Name = "contextMenuStripAddresses";
-            this.contextMenuStripAddresses.Size = new System.Drawing.Size(119, 136);
+            this.contextMenuStripAddresses.Size = new System.Drawing.Size(115, 136);
             // 
             // importToolStripMenuItem
             // 
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.importToolStripMenuItem.Text = "Import...";
             this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
             // 
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.exportToolStripMenuItem.Text = "Export...";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
             // addToolStripMenuItem
             // 
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.addToolStripMenuItem.Text = "Add...";
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.editToolStripMenuItem.Text = "Edit...";
             // 
             // clearAllToolStripMenuItem
             // 
             this.clearAllToolStripMenuItem.Name = "clearAllToolStripMenuItem";
-            this.clearAllToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.clearAllToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.clearAllToolStripMenuItem.Text = "Clear";
             this.clearAllToolStripMenuItem.Click += new System.EventHandler(this.clearAllAddressToolStripMenuItem_Click);
             // 
@@ -244,7 +247,7 @@
             this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox3.Size = new System.Drawing.Size(513, 74);
+            this.groupBox3.Size = new System.Drawing.Size(150, 74);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Attachments";
@@ -262,7 +265,7 @@
             this.listBoxAttachments.Location = new System.Drawing.Point(4, 19);
             this.listBoxAttachments.Margin = new System.Windows.Forms.Padding(4);
             this.listBoxAttachments.Name = "listBoxAttachments";
-            this.listBoxAttachments.Size = new System.Drawing.Size(505, 36);
+            this.listBoxAttachments.Size = new System.Drawing.Size(142, 36);
             this.listBoxAttachments.TabIndex = 0;
             // 
             // contextMenuStripAttachments
@@ -273,30 +276,30 @@
             this.editToolStripMenuItem1,
             this.clearAllToolStripMenuItem1});
             this.contextMenuStripAttachments.Name = "contextMenuStripAttachments";
-            this.contextMenuStripAttachments.Size = new System.Drawing.Size(122, 92);
+            this.contextMenuStripAttachments.Size = new System.Drawing.Size(118, 92);
             // 
             // addToolStripMenuItem1
             // 
             this.addToolStripMenuItem1.Name = "addToolStripMenuItem1";
-            this.addToolStripMenuItem1.Size = new System.Drawing.Size(121, 22);
+            this.addToolStripMenuItem1.Size = new System.Drawing.Size(117, 22);
             this.addToolStripMenuItem1.Text = "Browse...";
             // 
             // deleteToolStripMenuItem1
             // 
             this.deleteToolStripMenuItem1.Name = "deleteToolStripMenuItem1";
-            this.deleteToolStripMenuItem1.Size = new System.Drawing.Size(121, 22);
+            this.deleteToolStripMenuItem1.Size = new System.Drawing.Size(117, 22);
             this.deleteToolStripMenuItem1.Text = "Delete";
             // 
             // editToolStripMenuItem1
             // 
             this.editToolStripMenuItem1.Name = "editToolStripMenuItem1";
-            this.editToolStripMenuItem1.Size = new System.Drawing.Size(121, 22);
+            this.editToolStripMenuItem1.Size = new System.Drawing.Size(117, 22);
             this.editToolStripMenuItem1.Text = "Edit";
             // 
             // clearAllToolStripMenuItem1
             // 
             this.clearAllToolStripMenuItem1.Name = "clearAllToolStripMenuItem1";
-            this.clearAllToolStripMenuItem1.Size = new System.Drawing.Size(121, 22);
+            this.clearAllToolStripMenuItem1.Size = new System.Drawing.Size(117, 22);
             this.clearAllToolStripMenuItem1.Text = "Clear";
             this.clearAllToolStripMenuItem1.Click += new System.EventHandler(this.clearAllAttachmentToolStripMenuItem_Click);
             // 
@@ -347,6 +350,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.dateTimePickerTimedSend);
+            this.panel2.Controls.Add(this.checkBoxTimedSend);
             this.panel2.Controls.Add(this.buttonQuit);
             this.panel2.Controls.Add(this.buttonSend);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -557,12 +562,42 @@
             this.openFileDialog1.FileName = "import.txt";
             this.openFileDialog1.Filter = "txt file|*.txt";
             this.openFileDialog1.ReadOnlyChecked = true;
+            this.openFileDialog1.RestoreDirectory = true;
             this.openFileDialog1.ShowReadOnly = true;
             // 
             // saveFileDialog1
             // 
             this.saveFileDialog1.FileName = "export.txt";
             this.saveFileDialog1.Filter = "txt file|*.txt";
+            // 
+            // backgroundWorkerMailSender
+            // 
+            this.backgroundWorkerMailSender.WorkerReportsProgress = true;
+            this.backgroundWorkerMailSender.WorkerSupportsCancellation = true;
+            this.backgroundWorkerMailSender.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerMailSender_DoWork);
+            this.backgroundWorkerMailSender.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerMailSender_RunWorkerCompleted);
+            this.backgroundWorkerMailSender.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerMailSender_ProgressChanged);
+            // 
+            // checkBoxTimedSend
+            // 
+            this.checkBoxTimedSend.AutoSize = true;
+            this.checkBoxTimedSend.Location = new System.Drawing.Point(4, 12);
+            this.checkBoxTimedSend.Name = "checkBoxTimedSend";
+            this.checkBoxTimedSend.Size = new System.Drawing.Size(71, 20);
+            this.checkBoxTimedSend.TabIndex = 2;
+            this.checkBoxTimedSend.Text = "send at";
+            this.checkBoxTimedSend.UseVisualStyleBackColor = true;
+            this.checkBoxTimedSend.CheckedChanged += new System.EventHandler(this.checkBoxTimedSend_CheckedChanged);
+            // 
+            // dateTimePickerTimedSend
+            // 
+            this.dateTimePickerTimedSend.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            this.dateTimePickerTimedSend.Enabled = false;
+            this.dateTimePickerTimedSend.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePickerTimedSend.Location = new System.Drawing.Point(82, 10);
+            this.dateTimePickerTimedSend.Name = "dateTimePickerTimedSend";
+            this.dateTimePickerTimedSend.Size = new System.Drawing.Size(153, 22);
+            this.dateTimePickerTimedSend.TabIndex = 3;
             // 
             // MainForm
             // 
@@ -594,6 +629,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPort)).EndInit();
@@ -647,6 +683,9 @@
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerMailSender;
+        private System.Windows.Forms.CheckBox checkBoxTimedSend;
+        private System.Windows.Forms.DateTimePicker dateTimePickerTimedSend;
     }
 }
 
