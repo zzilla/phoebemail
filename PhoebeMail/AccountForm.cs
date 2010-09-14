@@ -15,16 +15,29 @@ namespace PhoebeMail
             InitializeComponent();
         }
 
-        public AccountForm(string[] parts)
+        public AccountForm(EmailAccount a)
         {
             InitializeComponent();
-            int i = 0;
-            textBoxUsername.Text = parts[i++];
-            textBoxPassword.Text = parts[i++];
-            textBoxNickname.Text = parts[i++];
-            textBoxServer.Text = parts[i++];
-            numericUpDownPort.Value = (decimal)int.Parse(parts[i++]);
-            checkBoxSsl.Checked = bool.Parse(parts[i++]);
+
+            textBoxUsername.Text = a.Username;
+            textBoxPassword.Text = a.Password;
+            textBoxNickname.Text = a.Nickname;
+            textBoxServer.Text = a.Server;
+            numericUpDownPort.Value = a.Port;
+            checkBoxSsl.Checked = a.EnableSsl;
+        }
+
+        public EmailAccount GetAccount()
+        {
+            EmailAccount a = new EmailAccount();
+            a.Username = textBoxUsername.Text;
+            a.Password = textBoxPassword.Text;
+            a.Nickname = textBoxNickname.Text;
+
+            a.Server = textBoxServer.Text;
+            a.Port = (int)numericUpDownPort.Value;
+            a.EnableSsl = checkBoxSsl.Checked;
+            return a;
         }
 
         public string GetUsername()
@@ -52,7 +65,7 @@ namespace PhoebeMail
             return (int)numericUpDownPort.Value;
         }
 
-        public bool SslEnabled()
+        public bool EnabledSsl()
         {
             return checkBoxSsl.Checked;
         }

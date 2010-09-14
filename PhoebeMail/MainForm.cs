@@ -16,10 +16,8 @@ namespace PhoebeMail
 {
     public partial class MainForm : Form
     {
-        private string m_email = "email.txt";
         private string m_formText;
         private string m_buttonText;
-        private static readonly String m_caption = "PhoebeMail";
 
         private System.Timers.Timer m_timer = new System.Timers.Timer();
 
@@ -34,73 +32,38 @@ namespace PhoebeMail
             m_timer.Elapsed += new System.Timers.ElapsedEventHandler(Timeout);
         }
 
-        public static void ShowInfomation(String message)
-        {
-            MessageBox.Show(message, m_caption + " Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        public static void ShowWarning(String message)
-        {
-            MessageBox.Show(message, m_caption + " Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        }
-
-        public static void ShowError(String message)
-        {
-            MessageBox.Show(message, m_caption + " Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
-        public static DialogResult ShowQuestion(String message)
-        {
-            return MessageBox.Show(message, m_caption + " Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-        }
-
         private void MainForm_Load(object sender, EventArgs e)
         {
-            textBoxSubject.Text = textBoxDefaultSubject.Text;
-
-            if (File.Exists(m_email))
-            {
-                richTextBoxDefaultBody.Text = File.ReadAllText(m_email);
-                richTextBoxBody.Text = richTextBoxDefaultBody.Text;
-            }
             DateTime now = DateTime.Now;
-
             dateTimePickerTimedSend.Value = new DateTime(now.Year, now.Month, now.Day, 21, 0, 0);
-
-            LoadAccounts();
+            //加载已有账号
+            DataCenter.Instance.LoadAccounts();
+            foreach (EmailAccount a in DataCenter.Instance.Accounts)
+            {
+                listViewAccounts.Items.Add(BuildListViewItem(a));
+            }
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Settings.Default.Username = textBoxUsername.Text;
-            Settings.Default.Password = textBoxPassword.Text;
-            Settings.Default.Nickname = textBoxNickname.Text;
-            Settings.Default.Server = textBoxServer.Text;
-            Settings.Default.Port = numericUpDownPort.Value;
-            Settings.Default.Ssl = checkBoxSsl.Checked;
-            Settings.Default.DefaultSubject = textBoxDefaultSubject.Text;
+            DialogResult r = QMessageBox.ShowQuestion("Are you sure to exit?");
+
+            if (r == DialogResult.No)
+            {
+                e.Cancel = true;
+                return;
+            }
+
+            Settings.Default.Subject = textBoxSubject.Text;
+            Settings.Default.Body = richTextBoxBody.Text;
             Settings.Default.Save();
 
-            SaveAccounts();
+            DataCenter.Instance.SaveAccounts();
         }
 
         private void buttonQuit_Click(object sender, EventArgs e)
         {
             Close();
-        }
-
-        private void textBoxDefaultSubject_TextChanged(object sender, EventArgs e)
-        {
-            textBoxSubject.Text = textBoxDefaultSubject.Text;
-        }
-
-        private void richTextBoxDefaultBody_TextChanged(object sender, EventArgs e)
-        {
-            if (!String.IsNullOrEmpty(richTextBoxDefaultBody.Text))
-            {
-                richTextBoxBody.Text = richTextBoxDefaultBody.Text;
-                File.WriteAllText(m_email, richTextBoxDefaultBody.Text);
-            }
         }
 
         private void clearAllAddressToolStripMenuItem_Click(object sender, EventArgs e)
@@ -174,57 +137,6 @@ namespace PhoebeMail
             return m_regex.Matches(input);
         }
 
-        class MailJob
-        {
-            public SmtpClient m_smtpClient;
-            public MailMessage m_mailMessage;
-            public object[] m_addresses;
-            public DateTime m_begin;
-            public DateTime m_end;
-
-            public int m_done = 0;
-            public int m_fail = 0;
-            public string m_current = string.Empty;
-
-            public MailJob(SmtpClient client, MailMessage msg, object[] addresses)
-            {
-                m_smtpClient = client;
-                m_mailMessage = msg;
-                m_addresses = addresses;
-            }
-
-            public void Send(BackgroundWorker worker)
-            {
-                m_begin = DateTime.Now;
-                foreach (object item in m_addresses)
-                {
-                    if (worker.CancellationPending)
-                    {
-                        break;
-                    }
-
-                    m_current = item.ToString();
-                    m_mailMessage.To.Clear();
-                    m_mailMessage.To.Add(m_current);
-
-                    try
-                    {
-                        worker.ReportProgress((int)(m_done / m_addresses.Length), this);
-                        m_smtpClient.Send(m_mailMessage);
-                    }
-                    catch (System.Exception)
-                    {
-                        ++m_fail;
-                    }
-                    finally
-                    {
-                        ++m_done;
-                    }
-                }
-                m_end = DateTime.Now;
-            }
-        }
-
         private MailJob job = null;
 
         private void buttonSend_Click(object sender, EventArgs e)
@@ -243,68 +155,55 @@ namespace PhoebeMail
                 return;
             }
 
-            if (comboBoxAccounts.SelectedItem == null)
+            if (comboBoxAccounts.Items.Count < 1)
             {
-                ShowWarning("account can not be empty!");
+                QMessageBox.ShowWarning("account can not be empty!");
+                return;
+            }
+            else if (comboBoxAccounts.SelectedIndex < 0)
+            {
+                QMessageBox.ShowWarning("you must select an account!");
                 return;
             }
             else if (String.IsNullOrEmpty(textBoxSubject.Text))
             {
-                ShowWarning("email subject can not be empty!");
+                QMessageBox.ShowWarning("email subject can not be empty!");
                 return;
             }
             else if (String.IsNullOrEmpty(richTextBoxBody.Text))
             {
-                ShowWarning("email body can not be empty!");
+                QMessageBox.ShowWarning("email body can not be empty!");
                 return;
             }
             else if (listBoxAddresses.Items.Count <= 0)
             {
-                ShowWarning("recipients can not be empty!");
+                QMessageBox.ShowWarning("recipients can not be empty!");
                 return;
-            }
-
-            TagedItem item = (TagedItem)comboBoxAccounts.SelectedItem;
-            ListViewItem lvi = item.item;
-            AccountForm f = (AccountForm)lvi.Tag;
-
-            SmtpClient smtpClient = new SmtpClient();
-            smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-            smtpClient.EnableSsl = f.SslEnabled();
-            smtpClient.Credentials = new NetworkCredential(f.GetUsername(), f.GetPassword());
-            smtpClient.Host = f.GetServer();
-            smtpClient.Port = f.GetPort();
-
-            MailMessage mailMessage = new MailMessage();
-            mailMessage.From = new MailAddress(f.GetUsername(), f.GetNickname());
-            mailMessage.SubjectEncoding = Encoding.GetEncoding("GB2312");
-            mailMessage.BodyEncoding = Encoding.GetEncoding("GB2312");
-            mailMessage.Subject = textBoxSubject.Text;
-            mailMessage.Body = richTextBoxBody.Text;
-
-            object[] addresses = new object[listBoxAddresses.Items.Count];
-
-            listBoxAddresses.Items.CopyTo(addresses, 0);
-
-            job = new MailJob(smtpClient, mailMessage, addresses);
-
-            if (checkBoxTimedSend.Checked)
-            {
-                if (dateTimePickerTimedSend.Value <= DateTime.Now)
-                {
-                    ShowError("the time is in the past!");
-                    return;
-                }
-                m_timer.Interval = dateTimePickerTimedSend.Value.Subtract(DateTime.Now).TotalSeconds * 1000;
             }
             else
             {
-                m_timer.Interval = 1;
+                if (checkBoxTimedSend.Checked)
+                {
+                    if (dateTimePickerTimedSend.Value <= DateTime.Now)
+                    {
+                        QMessageBox.ShowError("the time is in the past!");
+                        return;
+                    }
+                    m_timer.Interval = dateTimePickerTimedSend.Value.Subtract(DateTime.Now).TotalSeconds * 1000;
+                }
+                else
+                {
+                    m_timer.Interval = 1;
+                }
             }
 
-            m_timer.Enabled = true;
+            WrappedItem item = (WrappedItem)comboBoxAccounts.SelectedItem;
+            EmailAccount a = item.Account;
+            a.Init(textBoxSubject.Text, richTextBoxBody.Text);
+            object[] addresses = new object[listBoxAddresses.Items.Count];
+            listBoxAddresses.Items.CopyTo(addresses, 0);
+            job = new MailJob(a, addresses);
             m_timer.Start();
-
             buttonSend.Text = "Cancel";
             buttonQuit.Enabled = false;
 
@@ -319,7 +218,6 @@ namespace PhoebeMail
         private void backgroundWorkerMailSender_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             this.Invoke(new ProgressChangedEventHandler(UpdateProgress));
-
         }
 
         private delegate void ProgressChangedEventHandler();
@@ -353,13 +251,12 @@ namespace PhoebeMail
                 sum.AppendFormat("average {0}/{1} = {2} seconds\n", seconds, job.m_done, seconds / job.m_done);
             }
 
-            ShowInfomation(sum.ToString());
+            QMessageBox.ShowInfomation(sum.ToString());
         }
 
         private void Timeout(Object sender, System.Timers.ElapsedEventArgs e)
         {
             backgroundWorkerMailSender.RunWorkerAsync();
-            m_timer.Enabled = false;
             m_timer.Stop();
         }
 
@@ -378,11 +275,11 @@ namespace PhoebeMail
 
                 if (!IsEmailAddress(address))
                 {
-                    ShowWarning("invalid email address!");
+                    QMessageBox.ShowWarning("invalid email address!");
                 }
                 else if (listBoxAddresses.Items.Contains(address))
                 {
-                    ShowWarning("email address existed!");
+                    QMessageBox.ShowWarning("email address existed!");
                 }
                 else
                 {
@@ -423,11 +320,11 @@ namespace PhoebeMail
 
                     if (!IsEmailAddress(newAddress) && (newAddress != old))
                     {
-                        ShowWarning("invalid email address!");
+                        QMessageBox.ShowWarning("invalid email address!");
                     }
                     else if (listBoxAddresses.Items.Contains(newAddress))
                     {
-                        ShowWarning("email address existed!");
+                        QMessageBox.ShowWarning("email address existed!");
                     }
                     else if (newAddress == old)
                     {
@@ -442,6 +339,14 @@ namespace PhoebeMail
             }
         }
 
+        private ListViewItem BuildListViewItem(EmailAccount a)
+        {
+            ListViewItem item = new ListViewItem();
+            item.Tag = a;
+            ShowAccount(item);
+            return item;
+        }
+
         private void addAccountToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AccountForm f = new AccountForm();
@@ -451,41 +356,29 @@ namespace PhoebeMail
 
                 if (string.IsNullOrEmpty(username))
                 {
-                    ShowWarning("username can't be empty!");
+                    QMessageBox.ShowWarning("username can't be empty!");
                 }
                 else if (!IsEmailAddress(username))
                 {
-                    ShowWarning("email address is not valid!");
+                    QMessageBox.ShowWarning("email address is not valid!");
                 }
                 else if (string.IsNullOrEmpty(f.GetPassword()))
                 {
-                    ShowWarning("password can't be empty!");
+                    QMessageBox.ShowWarning("password can't be empty!");
                 }
                 else if (string.IsNullOrEmpty(f.GetNickname()))
                 {
-                    ShowWarning("nickname can't be empty!");
+                    QMessageBox.ShowWarning("nickname can't be empty!");
                 }
                 else if (string.IsNullOrEmpty(f.GetServer()))
                 {
-                    ShowWarning("server can't be empty!");
+                    QMessageBox.ShowWarning("server can't be empty!");
                 }
                 else
                 {
-                    ListViewItem item = new ListViewItem();
-                    item.Text = f.GetUsername();
-                    StringBuilder b = new StringBuilder();
-                    foreach (char c in f.GetPassword())
-                    {
-                        b.Append("*");
-                    }
-                    item.SubItems.Add(b.ToString());
-                    item.SubItems.Add(f.GetNickname());
-                    item.SubItems.Add(f.GetServer());
-                    item.SubItems.Add(f.GetPort().ToString());
-                    item.SubItems.Add(f.SslEnabled().ToString());
-                    item.Tag = f;//为方便， 先这样
-                    listViewAccounts.Items.Add(item);
-                    //add success.
+                    EmailAccount a = f.GetAccount();
+                    listViewAccounts.Items.Add(BuildListViewItem(a));
+                    BuildAccountsList();
                     break;
                 }
             }
@@ -496,12 +389,16 @@ namespace PhoebeMail
             foreach (int index in listViewAccounts.SelectedIndices)
             {
                 listViewAccounts.Items.RemoveAt(index);
+                comboBoxAccounts.Items.RemoveAt(index);
             }
+            BuildAccountsList();
         }
 
         private void clearAccountToolStripMenuItem_Click(object sender, EventArgs e)
         {
             listViewAccounts.Items.Clear();
+            comboBoxAccounts.Items.Clear();
+            comboBoxAccounts.Update();
         }
 
         private void editAccountToolStripMenuItem_Click(object sender, EventArgs e)
@@ -514,141 +411,80 @@ namespace PhoebeMail
             OnEditAccount();
         }
 
+        private void ShowAccount(ListViewItem item)
+        { 
+            EmailAccount a = (EmailAccount)item.Tag;
+            item.SubItems.Clear();
+            item.Text = a.Username;
+            item.SubItems.Add(a.DisplayPassword());
+            item.SubItems.Add(a.Nickname);
+            item.SubItems.Add(a.Server);
+            item.SubItems.Add(a.Port.ToString());
+            item.SubItems.Add(a.EnableSsl.ToString());
+        }
+
         private void OnEditAccount()
         {
             if (listViewAccounts.SelectedItems.Count > 0)
             {
                 ListViewItem item = listViewAccounts.SelectedItems[0];
-                AccountForm f = (AccountForm)item.Tag;
+                EmailAccount a = (EmailAccount)item.Tag;
+
+                AccountForm f = new AccountForm(a);
+
                 while (f.ShowDialog() == DialogResult.OK)
                 {
                     string username = f.GetUsername();
 
                     if (string.IsNullOrEmpty(username))
                     {
-                        ShowWarning("username can't be empty!");
+                        QMessageBox.ShowWarning("username can't be empty!");
                     }
                     else if (!IsEmailAddress(username))
                     {
-                        ShowWarning("email address is not valid!");
+                        QMessageBox.ShowWarning("email address is not valid!");
                     }
                     else if (string.IsNullOrEmpty(f.GetPassword()))
                     {
-                        ShowWarning("password can't be empty!");
+                        QMessageBox.ShowWarning("password can't be empty!");
                     }
                     else if (string.IsNullOrEmpty(f.GetNickname()))
                     {
-                        ShowWarning("nickname can't be empty!");
+                        QMessageBox.ShowWarning("nickname can't be empty!");
                     }
                     else if (string.IsNullOrEmpty(f.GetServer()))
                     {
-                        ShowWarning("server can't be empty!");
+                        QMessageBox.ShowWarning("server can't be empty!");
                     }
                     else
                     {
-                        item.SubItems.Clear();
-                        item.Text = f.GetUsername();
-                        StringBuilder b = new StringBuilder();
-                        foreach (char c in f.GetPassword())
-                        {
-                            b.Append("*");
-                        }
-                        item.SubItems.Add(b.ToString());
-                        item.SubItems.Add(f.GetNickname());
-                        item.SubItems.Add(f.GetServer());
-                        item.SubItems.Add(f.GetPort().ToString());
-                        item.SubItems.Add(f.SslEnabled().ToString());
-                        item.Tag = f;//为方便， 先这样
+                        a.Username = f.GetUsername();
+                        a.Password = f.GetPassword();
+                        a.Nickname = f.GetNickname();
+                        a.Server = f.GetServer();
+                        a.Port = f.GetPort();
+                        a.EnableSsl = f.EnabledSsl();
+
+                        ShowAccount(item);
                         listViewAccounts.Update();
-                        //add success.
+                        BuildAccountsList();
                         break;
                     }
                 }
             }
         }
 
-        private string m_accounts = "accounts.txt";
-
-        private string Encrypt(string text)
-        {
-            return Convert.ToBase64String(Encoding.Unicode.GetBytes(text));
-        }
-
-        private string Decrypt(string text)
-        {
-            return Encoding.Unicode.GetString(Convert.FromBase64String(text));
-        }
-
-        private void SaveAccounts()
-        {
-            StringBuilder sb = new StringBuilder();
-
-            foreach (ListViewItem item in listViewAccounts.Items)
-            {
-                AccountForm f = (AccountForm)item.Tag;
-                sb.AppendFormat("{0},{1},{2},{3},{4},{5}\n",
-                    f.GetUsername(), Encrypt(f.GetPassword()), f.GetNickname(), f.GetServer(), f.GetPort(), f.SslEnabled());
-            }
-
-            File.WriteAllText(m_accounts, sb.ToString());
-        }
-
-        private void LoadAccounts()
-        {
-            if (File.Exists(m_accounts))
-            {
-                string[] lines = File.ReadAllLines(m_accounts);
-
-                foreach (string line in lines)
-                {
-                    if (string.IsNullOrEmpty(line))
-                    {
-                        continue;
-                    }
-
-                    string[] parts = line.Split(',');
-                    parts[1] = Decrypt(parts[1]);
-
-                    AccountForm f = new AccountForm(parts);
-
-                    ListViewItem item = new ListViewItem();
-                    item.Text = f.GetUsername();
-                    StringBuilder b = new StringBuilder();
-                    foreach (char c in f.GetPassword())
-                    {
-                        b.Append("*");
-                    }
-                    item.SubItems.Add(b.ToString());
-                    item.SubItems.Add(f.GetNickname());
-                    item.SubItems.Add(f.GetServer());
-                    item.SubItems.Add(f.GetPort().ToString());
-                    item.SubItems.Add(f.SslEnabled().ToString());
-                    item.Tag = f;//为方便， 先这样
-                    listViewAccounts.Items.Add(item);
-                }
-            }
-        }
-
-        class TagedItem
-        {
-            public TagedItem(ListViewItem item)
-            {
-                this.item = item;
-            }
-
-            public ListViewItem item;
-
-            public override string ToString()
-            {
-                return item.Text;
-            }
-        }
-
         private void comboBoxAccounts_DropDown(object sender, EventArgs e)
         {
-            foreach (ListViewItem item in listViewAccounts.Items)
+            BuildAccountsList();
+        }
+
+        private void BuildAccountsList()
+        {
+            comboBoxAccounts.Items.Clear();
+            foreach (EmailAccount a in DataCenter.Instance.Accounts)
             {
-                comboBoxAccounts.Items.Add(new TagedItem(item));
+                comboBoxAccounts.Items.Add(new WrappedItem(a));
             }
         }
     }

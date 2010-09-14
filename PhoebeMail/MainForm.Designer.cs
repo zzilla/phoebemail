@@ -54,27 +54,13 @@
             this.richTextBoxBody = new System.Windows.Forms.RichTextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBoxSubject = new System.Windows.Forms.TextBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.comboBoxAccounts = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dateTimePickerTimedSend = new System.Windows.Forms.DateTimePicker();
             this.checkBoxTimedSend = new System.Windows.Forms.CheckBox();
             this.buttonQuit = new System.Windows.Forms.Button();
             this.buttonSend = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.checkBoxSsl = new System.Windows.Forms.CheckBox();
-            this.numericUpDownPort = new System.Windows.Forms.NumericUpDown();
-            this.richTextBoxDefaultBody = new System.Windows.Forms.RichTextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.textBoxDefaultSubject = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBoxServer = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBoxPassword = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBoxNickname = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBoxUsername = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.listViewAccounts = new System.Windows.Forms.ListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
@@ -91,8 +77,6 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.backgroundWorkerMailSender = new System.ComponentModel.BackgroundWorker();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.comboBoxAccounts = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -107,18 +91,15 @@
             this.contextMenuStripAttachments.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPort)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.contextMenuStripAccounts.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -342,13 +323,14 @@
             // 
             // richTextBoxBody
             // 
+            this.richTextBoxBody.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::PhoebeMail.Properties.Settings.Default, "Body", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.richTextBoxBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBoxBody.Location = new System.Drawing.Point(4, 19);
             this.richTextBoxBody.Margin = new System.Windows.Forms.Padding(4);
             this.richTextBoxBody.Name = "richTextBoxBody";
             this.richTextBoxBody.Size = new System.Drawing.Size(505, 362);
             this.richTextBoxBody.TabIndex = 0;
-            this.richTextBoxBody.Text = "";
+            this.richTextBoxBody.Text = global::PhoebeMail.Properties.Settings.Default.Body;
             // 
             // groupBox2
             // 
@@ -365,12 +347,35 @@
             // 
             // textBoxSubject
             // 
+            this.textBoxSubject.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::PhoebeMail.Properties.Settings.Default, "Subject", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBoxSubject.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBoxSubject.Location = new System.Drawing.Point(4, 19);
             this.textBoxSubject.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxSubject.Name = "textBoxSubject";
             this.textBoxSubject.Size = new System.Drawing.Size(505, 22);
             this.textBoxSubject.TabIndex = 0;
+            this.textBoxSubject.Text = global::PhoebeMail.Properties.Settings.Default.Subject;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.comboBoxAccounts);
+            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox5.Location = new System.Drawing.Point(0, 0);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(513, 52);
+            this.groupBox5.TabIndex = 3;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Account";
+            // 
+            // comboBoxAccounts
+            // 
+            this.comboBoxAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBoxAccounts.FormattingEnabled = true;
+            this.comboBoxAccounts.Location = new System.Drawing.Point(3, 18);
+            this.comboBoxAccounts.Name = "comboBoxAccounts";
+            this.comboBoxAccounts.Size = new System.Drawing.Size(507, 24);
+            this.comboBoxAccounts.TabIndex = 0;
+            this.comboBoxAccounts.DropDown += new System.EventHandler(this.comboBoxAccounts_DropDown);
             // 
             // panel2
             // 
@@ -429,192 +434,6 @@
             this.buttonSend.Text = "Send";
             this.buttonSend.UseVisualStyleBackColor = true;
             this.buttonSend.Click += new System.EventHandler(this.buttonSend_Click);
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.checkBoxSsl);
-            this.tabPage2.Controls.Add(this.numericUpDownPort);
-            this.tabPage2.Controls.Add(this.richTextBoxDefaultBody);
-            this.tabPage2.Controls.Add(this.label7);
-            this.tabPage2.Controls.Add(this.textBoxDefaultSubject);
-            this.tabPage2.Controls.Add(this.label6);
-            this.tabPage2.Controls.Add(this.label4);
-            this.tabPage2.Controls.Add(this.textBoxServer);
-            this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.textBoxPassword);
-            this.tabPage2.Controls.Add(this.label3);
-            this.tabPage2.Controls.Add(this.textBoxNickname);
-            this.tabPage2.Controls.Add(this.label2);
-            this.tabPage2.Controls.Add(this.textBoxUsername);
-            this.tabPage2.Controls.Add(this.label1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage2.Size = new System.Drawing.Size(784, 537);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Setting";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxSsl
-            // 
-            this.checkBoxSsl.AutoSize = true;
-            this.checkBoxSsl.Checked = global::PhoebeMail.Properties.Settings.Default.Ssl;
-            this.checkBoxSsl.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxSsl.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::PhoebeMail.Properties.Settings.Default, "Ssl", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.checkBoxSsl.Location = new System.Drawing.Point(380, 64);
-            this.checkBoxSsl.Name = "checkBoxSsl";
-            this.checkBoxSsl.Size = new System.Drawing.Size(98, 20);
-            this.checkBoxSsl.TabIndex = 15;
-            this.checkBoxSsl.Text = "Enable SSL";
-            this.checkBoxSsl.UseVisualStyleBackColor = true;
-            // 
-            // numericUpDownPort
-            // 
-            this.numericUpDownPort.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::PhoebeMail.Properties.Settings.Default, "Port", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.numericUpDownPort.Location = new System.Drawing.Point(453, 98);
-            this.numericUpDownPort.Margin = new System.Windows.Forms.Padding(4);
-            this.numericUpDownPort.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-            this.numericUpDownPort.Name = "numericUpDownPort";
-            this.numericUpDownPort.Size = new System.Drawing.Size(264, 22);
-            this.numericUpDownPort.TabIndex = 14;
-            this.numericUpDownPort.Value = global::PhoebeMail.Properties.Settings.Default.Port;
-            // 
-            // richTextBoxDefaultBody
-            // 
-            this.richTextBoxDefaultBody.Location = new System.Drawing.Point(87, 189);
-            this.richTextBoxDefaultBody.Margin = new System.Windows.Forms.Padding(4);
-            this.richTextBoxDefaultBody.Name = "richTextBoxDefaultBody";
-            this.richTextBoxDefaultBody.Size = new System.Drawing.Size(629, 319);
-            this.richTextBoxDefaultBody.TabIndex = 13;
-            this.richTextBoxDefaultBody.Text = "";
-            this.richTextBoxDefaultBody.TextChanged += new System.EventHandler(this.richTextBoxDefaultBody_TextChanged);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(11, 189);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(40, 16);
-            this.label7.TabIndex = 12;
-            this.label7.Text = "Body";
-            // 
-            // textBoxDefaultSubject
-            // 
-            this.textBoxDefaultSubject.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::PhoebeMail.Properties.Settings.Default, "DefaultSubject", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBoxDefaultSubject.Location = new System.Drawing.Point(87, 143);
-            this.textBoxDefaultSubject.Margin = new System.Windows.Forms.Padding(4);
-            this.textBoxDefaultSubject.Name = "textBoxDefaultSubject";
-            this.textBoxDefaultSubject.Size = new System.Drawing.Size(629, 22);
-            this.textBoxDefaultSubject.TabIndex = 11;
-            this.textBoxDefaultSubject.Text = global::PhoebeMail.Properties.Settings.Default.DefaultSubject;
-            this.textBoxDefaultSubject.TextChanged += new System.EventHandler(this.textBoxDefaultSubject_TextChanged);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(11, 147);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(53, 16);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "Subject";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(377, 101);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(32, 16);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Port";
-            // 
-            // textBoxServer
-            // 
-            this.textBoxServer.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::PhoebeMail.Properties.Settings.Default, "Server", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBoxServer.Location = new System.Drawing.Point(87, 98);
-            this.textBoxServer.Margin = new System.Windows.Forms.Padding(4);
-            this.textBoxServer.Name = "textBoxServer";
-            this.textBoxServer.Size = new System.Drawing.Size(263, 22);
-            this.textBoxServer.TabIndex = 7;
-            this.textBoxServer.Text = global::PhoebeMail.Properties.Settings.Default.Server;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(11, 101);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(48, 16);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "Server";
-            // 
-            // textBoxPassword
-            // 
-            this.textBoxPassword.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::PhoebeMail.Properties.Settings.Default, "Password", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBoxPassword.Location = new System.Drawing.Point(87, 61);
-            this.textBoxPassword.Margin = new System.Windows.Forms.Padding(4);
-            this.textBoxPassword.Name = "textBoxPassword";
-            this.textBoxPassword.PasswordChar = '*';
-            this.textBoxPassword.Size = new System.Drawing.Size(263, 22);
-            this.textBoxPassword.TabIndex = 5;
-            this.textBoxPassword.Text = global::PhoebeMail.Properties.Settings.Default.Password;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 65);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(68, 16);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Password";
-            // 
-            // textBoxNickname
-            // 
-            this.textBoxNickname.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::PhoebeMail.Properties.Settings.Default, "Nickname", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBoxNickname.Location = new System.Drawing.Point(453, 20);
-            this.textBoxNickname.Margin = new System.Windows.Forms.Padding(4);
-            this.textBoxNickname.Name = "textBoxNickname";
-            this.textBoxNickname.Size = new System.Drawing.Size(263, 22);
-            this.textBoxNickname.TabIndex = 3;
-            this.textBoxNickname.Text = global::PhoebeMail.Properties.Settings.Default.Nickname;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(377, 23);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(69, 16);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Nickname";
-            // 
-            // textBoxUsername
-            // 
-            this.textBoxUsername.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::PhoebeMail.Properties.Settings.Default, "Username", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBoxUsername.Location = new System.Drawing.Point(87, 20);
-            this.textBoxUsername.Margin = new System.Windows.Forms.Padding(4);
-            this.textBoxUsername.Name = "textBoxUsername";
-            this.textBoxUsername.Size = new System.Drawing.Size(263, 22);
-            this.textBoxUsername.TabIndex = 1;
-            this.textBoxUsername.Text = global::PhoebeMail.Properties.Settings.Default.Username;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 23);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 16);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Username";
             // 
             // tabPage3
             // 
@@ -735,27 +554,6 @@
             this.backgroundWorkerMailSender.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerMailSender_RunWorkerCompleted);
             this.backgroundWorkerMailSender.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerMailSender_ProgressChanged);
             // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.comboBoxAccounts);
-            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox5.Location = new System.Drawing.Point(0, 0);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(513, 52);
-            this.groupBox5.TabIndex = 3;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Account";
-            // 
-            // comboBoxAccounts
-            // 
-            this.comboBoxAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comboBoxAccounts.FormattingEnabled = true;
-            this.comboBoxAccounts.Location = new System.Drawing.Point(3, 18);
-            this.comboBoxAccounts.Name = "comboBoxAccounts";
-            this.comboBoxAccounts.Size = new System.Drawing.Size(507, 24);
-            this.comboBoxAccounts.TabIndex = 0;
-            this.comboBoxAccounts.DropDown += new System.EventHandler(this.comboBoxAccounts_DropDown);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -785,14 +583,11 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPort)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.contextMenuStripAccounts.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -801,7 +596,6 @@
 
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Panel panel2;
@@ -826,27 +620,12 @@
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem clearAllToolStripMenuItem1;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBoxServer;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBoxPassword;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBoxNickname;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBoxUsername;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBoxDefaultSubject;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.RichTextBox richTextBoxDefaultBody;
-        private System.Windows.Forms.NumericUpDown numericUpDownPort;
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.ComponentModel.BackgroundWorker backgroundWorkerMailSender;
         private System.Windows.Forms.CheckBox checkBoxTimedSend;
         private System.Windows.Forms.DateTimePicker dateTimePickerTimedSend;
-        private System.Windows.Forms.CheckBox checkBoxSsl;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.ListView listViewAccounts;
         private System.Windows.Forms.ColumnHeader columnHeader1;

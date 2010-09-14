@@ -2,26 +2,14 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PhoebeMail.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="Username" Type="System.String" Scope="User">
-      <Value Profile="(Default)">why11221220@gmail.com</Value>
-    </Setting>
-    <Setting Name="Password" Type="System.String" Scope="User">
-      <Value Profile="(Default)">89354959</Value>
-    </Setting>
-    <Setting Name="Nickname" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Phoebe</Value>
-    </Setting>
-    <Setting Name="Server" Type="System.String" Scope="User">
-      <Value Profile="(Default)">smtp.gmail.com</Value>
-    </Setting>
-    <Setting Name="DefaultSubject" Type="System.String" Scope="User">
+    <Setting Name="Subject" Type="System.String" Scope="User">
       <Value Profile="(Default)">Re:Re: Audio Visual Equipment</Value>
     </Setting>
-    <Setting Name="Port" Type="System.Decimal" Scope="User">
-      <Value Profile="(Default)">587</Value>
+    <Setting Name="SelectedAccountIndex" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="Ssl" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+    <Setting Name="Body" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>
