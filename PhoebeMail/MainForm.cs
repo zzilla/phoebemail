@@ -378,6 +378,7 @@ namespace PhoebeMail
                 {
                     EmailAccount a = f.GetAccount();
                     listViewAccounts.Items.Add(BuildListViewItem(a));
+                    DataCenter.Instance.Add(a);
                     BuildAccountsList();
                     break;
                 }
