@@ -390,7 +390,7 @@ namespace PhoebeMail
             foreach (int index in listViewAccounts.SelectedIndices)
             {
                 listViewAccounts.Items.RemoveAt(index);
-                comboBoxAccounts.Items.RemoveAt(index);
+                DataCenter.Instance.RemoveAt(index);
             }
             BuildAccountsList();
         }
@@ -400,6 +400,7 @@ namespace PhoebeMail
             listViewAccounts.Items.Clear();
             comboBoxAccounts.Items.Clear();
             comboBoxAccounts.Update();
+            DataCenter.Instance.Clear();
         }
 
         private void editAccountToolStripMenuItem_Click(object sender, EventArgs e)

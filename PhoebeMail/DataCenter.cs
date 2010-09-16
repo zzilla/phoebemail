@@ -67,5 +67,15 @@ namespace PhoebeMail
         {
             m_accounts.Remove(account);
         }
+
+        public void RemoveAt(int index)
+        {
+            m_accounts.RemoveAt(index);
+        }
+
+        public void Clear()
+        {
+            m_accounts.Clear();
+        }
     }
 }

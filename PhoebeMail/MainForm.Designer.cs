@@ -470,7 +470,7 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "username";
-            this.columnHeader1.Width = 150;
+            this.columnHeader1.Width = 200;
             // 
             // columnHeader2
             // 
@@ -485,7 +485,7 @@
             // columnHeader4
             // 
             this.columnHeader4.Text = "server";
-            this.columnHeader4.Width = 150;
+            this.columnHeader4.Width = 200;
             // 
             // columnHeader5
             // 
