@@ -1,0 +1,10 @@
+模块说明,模块缩写,错误码,中文说明,英文说明
+公用模块,cmm,,,
+,,success,操作成功,operation success
+,,err,无法预知的错误,no define error
+,,nomem,没有内存,system no memory
+DE,de,,,
+,,paramerr,参数错误,parameter error
+告警模块,alm,,,
+性能模块,per,,,
+CPM单板,cpm,,,
