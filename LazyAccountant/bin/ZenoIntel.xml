@@ -2,10 +2,7 @@
 <ZenoIntel>
   <!--各字段依次是工号, 姓名, 邮箱, 账内工资, 账外工资, 社保扣款, 住房公积金扣款-->
   <Employees>
-    <Employee id="1" name="陈  蕾" email="qguo@zenointel.com" internalSalary="5147" externalSalary="2000" socialInsuranceCut="147" houseFundCut="99"/>
-    <Employee id="5" name="郭  桥" email="qguo@zenointel.com" internalSalary="5147" externalSalary="2000" socialInsuranceCut="147" houseFundCut="0"/>
-    <Employee id="8" name="谢清华" email="qguo@zenointel.com" internalSalary="5147" externalSalary="0" socialInsuranceCut="147" houseFundCut="0"/>
-    <Employee id="9" name="胡发根" email="qguo@zenointel.com" internalSalary="5147" externalSalary="0" socialInsuranceCut="147" houseFundCut="0"/>
+    <Employee id="5" name="郭  桥" email="qguo@zenointel.com" internalSalary="8000" externalSalary="0" socialInsuranceCut="147" houseFundCut="0"/>
   </Employees>
   <!--每次迟到扣款-->
   <LateCutUnit>10</LateCutUnit>
